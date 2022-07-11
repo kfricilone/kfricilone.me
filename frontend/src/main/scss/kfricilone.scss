@@ -1,0 +1,165 @@
+$bg-col-dark: #0d1117;
+$fg-col-dark: #8b949e;
+$bg-col-light: #fff;
+$fg-col-light: #0d1117;
+
+@font-face {
+  font-family: "CaskaydiaCove";
+  src: url("CaskaydiaCove.ttf") format("truetype");
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%
+}
+
+article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
+  display: block
+}
+
+html {
+  font-size: 16px;
+  -webkit-tap-highlight-color: transparent
+}
+
+body {
+  margin: 0;
+  color: $fg-col-light;
+  background-color: $bg-col-light;
+  font-size: 1rem;
+  font-family: CaskaydiaCove, sans-serif;
+  line-height: 1.6;
+  word-break: break-word;
+  word-wrap: break-word;
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  &.dark-theme {
+	color: $fg-col-dark;
+	background-color: $bg-col-dark;
+  }
+}
+
+a {
+  text-decoration: none;
+  background-color: transparent;
+  color: #58a6ff;
+}
+
+@page {
+  margin-top: .75in;
+  margin-bottom: .75in
+}
+
+.h-6 {
+  height: 2rem
+}
+
+.w-6 {
+  width: 2rem
+}
+
+.theme-switch {
+  cursor: pointer;
+  margin: 1.25em;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: +1000;
+}
+
+.header {
+  text-align: center;
+
+  &--title {
+	font-size: 3.75rem;
+	margin-top: 0.2rem;
+	margin-bottom: 0.5rem;
+  }
+
+  &--social-media {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin: -0.5rem 0 1rem;
+
+	&--item {
+	  display: block;
+	  width: 2.25rem;
+	  height: 2.25rem;
+	  margin: .5rem;
+	  color: inherit;
+
+	  & > svg {
+		fill: currentColor;
+	  }
+	}
+  }
+
+  &--pitch {
+	font-size: 1.1rem;
+  }
+}
+
+.projects {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem -.5rem;
+  overflow: hidden;
+
+  & > div {
+	flex: 1 1 18rem;
+  }
+}
+
+.column {
+  margin-right: 16px;
+  margin-left: 16px
+}
+
+@media only screen and (min-width: 702px) {
+  body{
+	font-size: 1.25rem
+  }
+
+  h1{
+	font-size: 2.75rem
+  }
+
+  .column {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 680px
+  }
+}
+
+@media print {
+  body {
+	font-size: .875rem;
+	overflow: hidden;
+	orphans: 2;
+	widows: 2
+  }
+
+  body {
+	overflow: visible
+  }
+
+  .column {
+	margin-right: auto;
+	margin-left: auto;
+	max-width: 4.95in
+  }
+
+  main {
+	margin-bottom: 1.5rem
+  }
+}
+
+@media print and (color) {
+  * {
+	-webkit-print-color-adjust: exact
+  }
+}
