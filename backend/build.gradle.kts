@@ -12,7 +12,7 @@ plugins {
 dependencies {
     implementation(kotlin("stdlib-jdk8", libs.versions.kotlin.get()))
     implementation(libs.bundles.ktor)
-    implementation(libs.kjscard)
+    implementation(libs.kard)
     implementation(projects.frontend)
 }
 

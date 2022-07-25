@@ -18,8 +18,15 @@ plugins {
     alias(libs.plugins.webjar) apply false
 }
 
-group = Props.group
-version = Props.version
+val jvmVersion = JavaVersion.VERSION_11
+val commonArgs = listOf(
+    "-opt-in=io.ktor.server.locations.KtorExperimentalLocationsAPI",
+    "-Xinline-classes"
+)
+val jvmArgs = commonArgs + listOf(
+    "-Xjsr305=strict"
+)
+
 description = "Personal website"
 
 tasks.withType<Wrapper> {
@@ -36,14 +43,12 @@ tasks.withType<DependencyUpdatesTask> {
     }
 }
 
-repositories {
-    mavenCentral()
+allprojects {
+    group = "me.kfricilone"
+    version = "1.0.0-SNAPSHOT"
 }
 
 subprojects {
-    group = Props.group
-    version = Props.version
-
     repositories {
         mavenLocal()
         mavenCentral()
@@ -71,20 +76,20 @@ subprojects {
         configure<JavaPluginExtension> {
             withSourcesJar()
 
-            sourceCompatibility = Props.jvmVersion
-            targetCompatibility = Props.jvmVersion
+            sourceCompatibility = jvmVersion
+            targetCompatibility = jvmVersion
         }
     }
 
     tasks.withType<JavaCompile> {
         options.encoding = StandardCharsets.UTF_8.name()
-        options.release.set(Props.jvmVersion.toString().toInt())
+        options.release.set(jvmVersion.toString().toInt())
     }
 
     tasks.withType<KotlinCompile> {
         kotlinOptions {
-            jvmTarget = Props.jvmVersion.toString()
-            freeCompilerArgs = Props.jvmArgs
+            jvmTarget = jvmVersion.toString()
+            freeCompilerArgs = jvmArgs
         }
     }
 
@@ -94,11 +99,11 @@ subprojects {
     }
 
     tasks.withType<Detekt>().configureEach {
-        jvmTarget = Props.jvmVersion.toString()
+        jvmTarget = jvmVersion.toString()
     }
 
     tasks.withType<DetektCreateBaselineTask>().configureEach {
-        jvmTarget = Props.jvmVersion.toString()
+        jvmTarget = jvmVersion.toString()
     }
 
     plugins.withType<MavenPublishPlugin> {
@@ -107,8 +112,8 @@ subprojects {
         configure<PublishingExtension> {
             publications.withType<MavenPublication> {
                 pom {
-                    url.set("https://github.com/kfricilone/pasty")
-                    inceptionYear.set("2021")
+                    url.set("https://github.com/kfricilone/${rootProject.name}")
+                    inceptionYear.set("2022")
 
                     licenses {
                         license {
@@ -120,29 +125,30 @@ subprojects {
                     developers {
                         developer {
                             name.set("Kyle Fricilone")
-                            url.set("https://github.com/kfricilone")
+                            url.set("https://kfricilone.me")
                         }
                     }
 
                     scm {
-                        connection.set("scm:git:https://github.com/kfricilone/pasty")
-                        developerConnection.set("scm:git:git@github.com:kfricilone/pasty.git")
-                        url.set("https://github.com/kfricilone/pasty")
+                        connection.set("scm:git:https://github.com/kfricilone/${rootProject.name}")
+                        developerConnection.set("scm:git:git@github.com:kfricilone/${rootProject.name}.git")
+                        url.set("https://github.com/kfricilone/${rootProject.name}")
                     }
 
                     issueManagement {
                         system.set("GitHub")
-                        url.set("https://github.com/kfricilone/pasty/issues")
+                        url.set("https://github.com/kfricilone/${rootProject.name}/issues")
                     }
 
                     ciManagement {
                         system.set("GitHub")
-                        url.set("https://github.com/kfricilone/pasty/actions?query=workflow%3Aci")
+                        url.set("https://github.com/kfricilone/${rootProject.name}/actions?query=workflow%3Aci")
                     }
                 }
             }
 
             configure<SigningExtension> {
+                useGpgCmd()
                 sign(publications)
             }
         }

@@ -18,7 +18,7 @@ $(function () {
 	}
 
 	// @ts-ignore
-	kjscard.buildGhCards(darkTheme)
+	kard.buildGhCards(darkTheme)
 });
 
 const isLightPreferred = (): boolean => {
@@ -42,7 +42,7 @@ const setStorage = () => {
 
 const setTheme = () => {
 	// @ts-ignore
-	kjscard.switchGhTheme($(":root").get(0), darkTheme)
+	kard.switchGhTheme($(":root").get(0), darkTheme)
 	if (darkTheme) {
 		$("body").addClass("dark-theme")
 	} else {

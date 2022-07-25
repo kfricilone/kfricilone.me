@@ -19,9 +19,8 @@ package me.kfricilone
 public val repos: List<String> = listOf(
     "kfricilone/pasty",
     "kfricilone/kfricilone.me",
-    "kfricilone/OpenRS",
+    "kfricilone/kard",
     "kfricilone/wizzy",
-    "kfricilone/kjscard",
-    "service-rs/spring-rs",
-    "kfricilone/astral"
+    "kfricilone/OpenRS",
+    "service-rs/spring-rs"
 )

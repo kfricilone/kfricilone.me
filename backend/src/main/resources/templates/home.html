@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="/webjars/kfricilone/kfricilone.css" />
 
 		<script src="https://unpkg.com/jquery/dist/jquery.min.js" type="text/javascript"></script>
-		<script src="/webjars/kjscard/kjscard.js" type="text/javascript"></script>
+		<script src="/webjars/kard/kard.js" type="text/javascript"></script>
 		<script src="/webjars/kfricilone/kfricilone.js" type="text/javascript"></script>
 	</head>
 	<body>
@@ -40,13 +40,13 @@
 			</p>
 			<h1>Projects</h1>
 			<div class="projects">
-				<div th:each="entry : ${repos}" class="gh-repo-card-main" th:attr="repo-path=${entry}"></div>
+				<div th:each="entry : ${repos}" class="kard-main" th:attr="repo-path=${entry}"></div>
 			</div>
 			<h1>About this website</h1>
 			<p>
 				This code for this site can be found at <a href="https://github.com/kfricilone/kfricilone.me">kfricilone/kfricilone.me</a>. The backend of the site is written in <a href="https://kotlinlang.org/">Kotlin</a> and uses <a href="https://ktor.io/">Ktor</a> for the webserver and <a href="https://thymeleaf.org/">Thymeleaf</a> for the layout. The frontend is written in <a href="https://typescriptlang.org/">Typescript</a> and <a href="https://sass-lang.org/">SCSS</a>.
 				<br><br>
-				The github cards were created in <a href="https://kotlinlang.org/docs/js-overview.html">Kotlin/JS</a> using  <a href="https://github.com/JetBrains/kotlin-wrappers/blob/master/kotlin-react/">Kotlin-React</a>, <a href="https://github.com/JetBrains/kotlin-wrappers/blob/master/kotlin-styled/">Kotlin-Styled</a> and <a href="https://ktor.io/">Ktor</a>. The code can be found at <a href="https://github.com/kfricilone/kotlin-ghcard">kfricilone/kotlin-ghcard</a>.
+				The github cards were created in <a href="https://kotlinlang.org/docs/js-overview.html">Kotlin/JS</a> using  <a href="https://github.com/JetBrains/kotlin-wrappers/blob/master/kotlin-react/">Kotlin-React</a>, <a href="https://github.com/JetBrains/kotlin-wrappers/blob/master/kotlin-styled/">Kotlin-Styled</a> and <a href="https://ktor.io/">Ktor</a>. The code can be found at <a href="https://github.com/kfricilone/kard">kfricilone/kard</a>.
 			</p>
 		</div>
 	</body>
