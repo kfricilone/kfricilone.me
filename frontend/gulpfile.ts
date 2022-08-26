@@ -7,7 +7,7 @@ import cleanCSS from 'gulp-clean-css';
 import uglify from 'gulp-uglify';
 
 import dartSass from 'sass';
-import del from 'del';
+import del from 'del'
 
 const sass = gulpSass(dartSass);
 

@@ -21,5 +21,5 @@ import io.ktor.server.locations.Location
 @Location("/")
 public class Index
 
-@Location("/projects")
-public class Projects
+@Location("/gpg")
+public class Gpg

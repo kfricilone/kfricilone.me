@@ -26,6 +26,7 @@ import io.ktor.server.plugins.callloging.CallLogging
 import io.ktor.server.plugins.conditionalheaders.ConditionalHeaders
 import io.ktor.server.plugins.defaultheaders.DefaultHeaders
 import io.ktor.server.response.respond
+import io.ktor.server.response.respondText
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.routing
 import io.ktor.server.thymeleaf.Thymeleaf
@@ -54,6 +55,7 @@ public fun main() {
 
         routing {
             index()
+            gpg()
         }
     }.start(wait = true)
 }
@@ -61,5 +63,11 @@ public fun main() {
 private fun Route.index() {
     get<Index> {
         call.respond(ThymeleafContent("home", mapOf("repos" to repos)))
+    }
+}
+
+private fun Route.gpg() {
+    get<Gpg> {
+        call.respondText(gpgPublicKey)
     }
 }
