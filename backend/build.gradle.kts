@@ -25,12 +25,15 @@ application {
 }
 
 jib {
+    from {
+        image = "bellsoft/liberica-openjre-alpine:11"
+    }
     to {
         image = rootProject.name
         tags = setOf("${rootProject.version}")
     }
     container {
-        creationTime = "USE_CURRENT_TIMESTAMP"
+        creationTime.set("USE_CURRENT_TIMESTAMP")
         ports = listOf("8080")
     }
 }
