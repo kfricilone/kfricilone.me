@@ -16,6 +16,7 @@
 
 package me.kfricilone
 
+import io.ktor.server.application.Application
 import io.ktor.server.application.call
 import io.ktor.server.application.install
 import io.ktor.server.cio.CIO
@@ -36,28 +37,31 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver
 import java.nio.charset.StandardCharsets
 
 public fun main() {
-    embeddedServer(CIO, port = 8080, host = "0.0.0.0") {
-        install(CallLogging)
-        install(DefaultHeaders)
-        install(ConditionalHeaders)
-        install(Webjars)
-        install(Locations)
-        // install(ContentNegotiation) { json() }
-        install(Thymeleaf) {
-            setTemplateResolver(
-                ClassLoaderTemplateResolver().apply {
-                    prefix = "templates/"
-                    suffix = ".html"
-                    characterEncoding = StandardCharsets.UTF_8.name()
-                }
-            )
-        }
+    embeddedServer(CIO, port = 8080, host = "0.0.0.0", module = Application::module).start(wait = true)
+}
 
-        routing {
-            index()
-            gpg()
-        }
-    }.start(wait = true)
+private fun Application.module() {
+    install(DefaultHeaders)
+    install(ConditionalHeaders)
+    install(Webjars)
+    install(Locations)
+    install(CallLogging) {
+        disableDefaultColors()
+    }
+    install(Thymeleaf) {
+        setTemplateResolver(
+            ClassLoaderTemplateResolver().apply {
+                prefix = "templates/"
+                suffix = ".html"
+                characterEncoding = StandardCharsets.UTF_8.name()
+            },
+        )
+    }
+
+    routing {
+        index()
+        gpg()
+    }
 }
 
 private fun Route.index() {

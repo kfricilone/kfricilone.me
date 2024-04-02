@@ -16,11 +16,12 @@
 
 package me.kfricilone
 
-public val repos: List<String> = listOf(
-    "kfricilone/pasty",
-    "kfricilone/kfricilone.me",
-    "kfricilone/kard",
-    "kfricilone/wizzy",
-    "kfricilone/OpenRS",
-    "service-rs/spring-rs"
-)
+public val repos: List<String> =
+    listOf(
+        "kfricilone/pasty",
+        "kfricilone/kfricilone.me",
+        "kfricilone/kard",
+        "kfricilone/Taylir",
+        "kfricilone/OpenRS",
+        "service-rs/spring-rs",
+    )

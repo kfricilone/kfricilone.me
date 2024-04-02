@@ -1,10 +1,10 @@
-let darkTheme: boolean = false
-const themeKey: string = "kfricilone-theme"
+let darkTheme = false
+const themeKey = "kfricilone-theme"
 
-$(function () {
+$(() => {
 	darkTheme = !isLightPreferred()
 
-	$("#theme-switch").on("click", function () {
+	$("#theme-switch").on("click", () => {
 		darkTheme = !darkTheme
 		setButton()
 		setStorage()
@@ -17,13 +17,13 @@ $(function () {
 		$("body").addClass("dark-theme")
 	}
 
-	// @ts-ignore
-	kard.buildGhCards(darkTheme)
+	// @ts-ignore external function
+	kard.me.kfricilone.kard.buildKards(darkTheme)
 });
 
 const isLightPreferred = (): boolean => {
-	let theme = localStorage.getItem(themeKey)
-	return theme == null || theme == "light"
+	const theme = localStorage.getItem(themeKey)
+	return theme == null || theme === "light"
 }
 
 const setButton = () => {
@@ -41,8 +41,9 @@ const setStorage = () => {
 }
 
 const setTheme = () => {
-	// @ts-ignore
-	kard.switchGhTheme($(":root").get(0), darkTheme)
+	// @ts-ignore external function
+	kard.me.kfricilone.kard.switchKardTheme($(":root").get(0), darkTheme)
+
 	if (darkTheme) {
 		$("body").addClass("dark-theme")
 	} else {

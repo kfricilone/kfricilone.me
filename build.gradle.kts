@@ -18,7 +18,7 @@ plugins {
     alias(libs.plugins.webjar) apply false
 }
 
-val jvmVersion = JavaVersion.VERSION_11
+val jvmVersion = JavaVersion.VERSION_21
 val commonArgs = listOf(
     "-opt-in=io.ktor.server.locations.KtorExperimentalLocationsAPI",
     "-Xinline-classes"

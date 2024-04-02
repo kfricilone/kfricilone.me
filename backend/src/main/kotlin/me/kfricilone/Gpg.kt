@@ -16,7 +16,8 @@
 
 package me.kfricilone
 
-public val gpgPublicKey: String = """
+public val gpgPublicKey: String =
+    """
     -----BEGIN PGP PUBLIC KEY BLOCK-----
 
     mQINBGI2Q9wBEADccGkCqNgPwdsn+2Xpck4dzAUm0MG+yyC+3gZrkqTHTVKb6J9b
@@ -174,4 +175,4 @@ public val gpgPublicKey: String = """
     9YgmwqpbhF+2m+IP0tbfEhCIiZlLXE77rKe2VA==
     =wsxJ
     -----END PGP PUBLIC KEY BLOCK-----
-""".trimIndent()
+    """.trimIndent()
