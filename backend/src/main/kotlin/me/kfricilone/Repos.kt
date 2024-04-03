@@ -21,7 +21,7 @@ public val repos: List<String> =
         "kfricilone/pasty",
         "kfricilone/kfricilone.me",
         "kfricilone/kard",
-        "kfricilone/Taylir",
+        "kfricilone/kached",
         "kfricilone/OpenRS",
         "service-rs/spring-rs",
     )

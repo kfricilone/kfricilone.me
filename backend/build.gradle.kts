@@ -10,7 +10,7 @@ plugins {
 }
 
 dependencies {
-    implementation(kotlin("stdlib", libs.versions.kotlin.get()))
+    implementation(kotlin("stdlib"))
     implementation(libs.bundles.ktor)
     implementation(libs.kard)
     implementation(projects.frontend)
@@ -25,9 +25,6 @@ application {
 }
 
 jib {
-    from {
-        image = "bellsoft/liberica-openjre-alpine:11"
-    }
     to {
         image = rootProject.name
         tags = setOf("${rootProject.version}")

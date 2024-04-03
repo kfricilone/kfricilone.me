@@ -1,6 +1,10 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import com.google.cloud.tools.jib.gradle.JibExtension
+import com.google.cloud.tools.jib.gradle.JibPlugin
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
+import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
 import java.nio.charset.StandardCharsets
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -19,13 +23,6 @@ plugins {
 }
 
 val jvmVersion = JavaVersion.VERSION_21
-val commonArgs = listOf(
-    "-opt-in=io.ktor.server.locations.KtorExperimentalLocationsAPI",
-    "-Xinline-classes"
-)
-val jvmArgs = commonArgs + listOf(
-    "-Xjsr305=strict"
-)
 
 description = "Personal website"
 
@@ -72,25 +69,43 @@ subprojects {
         }
     }
 
+    plugins.withType<KotlinPluginWrapper> {
+        configure<KotlinJvmProjectExtension> {
+            explicitApi()
+
+            jvmToolchain(jvmVersion.majorVersion.toInt())
+
+            compilerOptions {
+                freeCompilerArgs.addAll(
+                    "-opt-in=io.ktor.server.locations.KtorExperimentalLocationsAPI",
+                    "-Xinline-classes",
+                    "-Xjsr305=strict"
+                )
+            }
+        }
+    }
+
     plugins.withType<JavaPlugin> {
         configure<JavaPluginExtension> {
             withSourcesJar()
 
-            sourceCompatibility = jvmVersion
-            targetCompatibility = jvmVersion
+            toolchain {
+                languageVersion.set(JavaLanguageVersion.of(jvmVersion.majorVersion))
+            }
+        }
+    }
+
+    plugins.withType<JibPlugin> {
+        configure<JibExtension> {
+            from {
+                image = "bellsoft/liberica-openjre-alpine:${jvmVersion.majorVersion}"
+            }
         }
     }
 
     tasks.withType<JavaCompile> {
         options.encoding = StandardCharsets.UTF_8.name()
         options.release.set(jvmVersion.toString().toInt())
-    }
-
-    tasks.withType<KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = jvmVersion.toString()
-            freeCompilerArgs = jvmArgs
-        }
     }
 
     tasks.withType<Test> {
