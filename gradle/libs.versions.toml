@@ -1,54 +1,58 @@
 [versions]
-gradle = "8.7"
-dependencies = "0.51.0"
-kotlin = "1.9.23"
-kover = "0.7.6"
-kotlinter = "4.3.0"
+compatibility = "0.17.0"
+dependencies = "0.52.0"
 detekt = "1.23.6"
-dokka = "1.9.20"
+dokka = "2.0.0"
+gradle = "8.14"
+java = "21"
 jib = "3.4.2"
-webjar = "1.3.1"
-node = "21.7.1"
-npm = "10.5.0"
-ktor = "2.3.9"
 kard = "1.0.0-SNAPSHOT"
-logback = "1.5.3"
+kotlin = "2.1.20"
+kotlinter = "5.0.1"
+kover = "0.7.6"
+ktor = "3.1.2"
+logback = "1.5.18"
+logging = "7.0.7"
+node = "23.11.0"
+npm = "11.3.0"
+publisher = "1.9.23-dev-45"
+webjar = "1.3.1"
 
 [plugins]
+binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "compatibility" }
 dependencies = { id = "com.github.ben-manes.versions", version.ref = "dependencies" }
-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
-kotlinter = { id = "org.jmailen.kotlinter", version.ref = "kotlinter" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 jib = { id = "com.google.cloud.tools.jib", version.ref = "jib" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-libs-publisher = { id = "org.jetbrains.kotlin.libs.publisher", version.ref = "publisher" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlinter = { id = "org.jmailen.kotlinter", version.ref = "kotlinter" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 webjar = { id = "com.coditory.webjar", version.ref = "webjar" }
 
 [libraries]
-ktor-server-cio = { module = "io.ktor:ktor-server-cio", version.ref = "ktor" }
-ktor-server-locations = { module = "io.ktor:ktor-server-locations", version.ref = "ktor" }
-ktor-server-auth = { module = "io.ktor:ktor-server-auth", version.ref = "ktor" }
-ktor-server-thymeleaf = { module = "io.ktor:ktor-server-thymeleaf", version.ref = "ktor" }
-ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktor" }
+kard = { module = "me.kfricilone.kard:kard-jvm", version.ref = "kard" }
+kotlin-logging = { module = "io.github.oshai:kotlin-logging", version.ref = "logging" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
-ktor-server-webjars = { module = "io.ktor:ktor-server-webjars", version.ref = "ktor" }
 ktor-server-call-logging = { module = "io.ktor:ktor-server-call-logging", version.ref = "ktor" }
-ktor-server-default-headers = { module = "io.ktor:ktor-server-default-headers", version.ref = "ktor" }
+ktor-server-cio = { module = "io.ktor:ktor-server-cio", version.ref = "ktor" }
 ktor-server-conditional-headers = { module = "io.ktor:ktor-server-conditional-headers", version.ref = "ktor" }
-kard = { module = "me.kfricilone:kard-jvm", version.ref = "kard" }
+ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation", version.ref = "ktor" }
+ktor-server-default-headers = { module = "io.ktor:ktor-server-default-headers", version.ref = "ktor" }
+ktor-server-thymeleaf = { module = "io.ktor:ktor-server-thymeleaf", version.ref = "ktor" }
+ktor-server-webjars = { module = "io.ktor:ktor-server-webjars", version.ref = "ktor" }
 logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 
 [bundles]
 ktor = [
-	"ktor-server-cio",
-	"ktor-server-auth",
-	"ktor-server-locations",
-	"ktor-server-thymeleaf",
-	"ktor-server-content-negotiation",
 	"ktor-serialization-kotlinx-json",
-	"ktor-server-webjars",
 	"ktor-server-call-logging",
+	"ktor-server-cio",
+	"ktor-server-conditional-headers",
+	"ktor-server-content-negotiation",
 	"ktor-server-default-headers",
-	"ktor-server-conditional-headers"
+	"ktor-server-thymeleaf",
+	"ktor-server-webjars",
 ]

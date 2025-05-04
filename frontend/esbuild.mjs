@@ -1,6 +1,5 @@
 import esbuild from "esbuild";
 import {sassPlugin} from "esbuild-sass-plugin";
-import {globPlugin} from 'esbuild-plugin-glob';
 
 await esbuild.build({
 	entryPoints: ["src/main/scss/*.scss"],
@@ -11,7 +10,6 @@ await esbuild.build({
 	sourcemap: true,
 	external: ['CaskaydiaCove.ttf'],
 	plugins: [
-		globPlugin(),
 		sassPlugin()
 	]
 })
@@ -24,7 +22,4 @@ await esbuild.build({
 	bundle: true,
 	minify: true,
 	sourcemap: true,
-	plugins: [
-		globPlugin()
-	]
 })

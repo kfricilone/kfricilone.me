@@ -17,34 +17,37 @@
 package me.kfricilone
 
 import io.ktor.server.application.Application
-import io.ktor.server.application.call
 import io.ktor.server.application.install
-import io.ktor.server.cio.CIO
-import io.ktor.server.engine.embeddedServer
-import io.ktor.server.locations.Locations
-import io.ktor.server.locations.get
-import io.ktor.server.plugins.callloging.CallLogging
+import io.ktor.server.cio.EngineMain
+import io.ktor.server.http.content.resolveResource
+import io.ktor.server.plugins.calllogging.CallLogging
 import io.ktor.server.plugins.conditionalheaders.ConditionalHeaders
 import io.ktor.server.plugins.defaultheaders.DefaultHeaders
 import io.ktor.server.response.respond
-import io.ktor.server.response.respondText
-import io.ktor.server.routing.Route
+import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
 import io.ktor.server.thymeleaf.Thymeleaf
-import io.ktor.server.thymeleaf.ThymeleafContent
+import io.ktor.server.thymeleaf.respondTemplate
 import io.ktor.server.webjars.Webjars
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver
 import java.nio.charset.StandardCharsets
 
-public fun main() {
-    embeddedServer(CIO, port = 8080, host = "0.0.0.0", module = Application::module).start(wait = true)
-}
+private val repos: List<String> =
+    listOf(
+        "kfricilone/pasty",
+        "kfricilone/kfricilone.me",
+        "kfricilone/kard",
+        "kfricilone/kached",
+        "kfricilone/OpenRS",
+        "service-rs/spring-rs",
+    )
 
-private fun Application.module() {
+public fun main(args: Array<String>): Unit = EngineMain.main(args)
+
+public fun Application.module() {
     install(DefaultHeaders)
     install(ConditionalHeaders)
     install(Webjars)
-    install(Locations)
     install(CallLogging) {
         disableDefaultColors()
     }
@@ -59,19 +62,12 @@ private fun Application.module() {
     }
 
     routing {
-        index()
-        gpg()
-    }
-}
+        get("/") {
+            call.respondTemplate(template = "home", model = mapOf("repos" to repos))
+        }
 
-private fun Route.index() {
-    get<Index> {
-        call.respond(ThymeleafContent("home", mapOf("repos" to repos)))
-    }
-}
-
-private fun Route.gpg() {
-    get<Gpg> {
-        call.respondText(gpgPublicKey)
+        get("/gpg") {
+            call.respond(call.resolveResource("gpg.txt", "static")!!)
+        }
     }
 }
