@@ -14,6 +14,7 @@ application {
 
 jib {
     container {
+        mainClass = "me.kfricilone.ServerKt"
         ports = listOf("8080")
     }
 }
